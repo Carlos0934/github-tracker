@@ -16,4 +16,5 @@ export interface UserDetail extends User {
   following : number
   public_repos : number
   public_gists : number
+  bio : string
 }

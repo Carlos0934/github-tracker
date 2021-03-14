@@ -17,7 +17,7 @@ width: 36px;
 height: 36px;
 border-radius:50%;
 border-left-color:#2973be;
-
+margin: 2rem auto;
 animation: ${rotate} infinite linear 1s;
 
 `

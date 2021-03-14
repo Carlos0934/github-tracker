@@ -8,23 +8,27 @@ interface RepositoryTableProps {
 const RepositoryTable : React.FC<RepositoryTableProps> = () => {
   const { selectedUser, setRepository } = useGithubUser()
 
-  if (!selectedUser) return <p>User required</p>
+  if (!selectedUser) return <></>
   return (
     <ConsumerTable
+      tableSize = 'small'
       consumer = {new RepositoryConsumer(selectedUser.login)}
       onSelected = {({ name }) => setRepository(name) }
+      title = 'Repositories'
       cols = {[
         {
           name: 'Name',
           key: 'name'
         },
         {
-          name: 'Watchers',
-          key: 'watchers'
+          name: 'Stars',
+          key: 'stargazers_count',
+          center: true
         },
         {
-          name: 'Stars ⭐',
-          key: 'stargazers_count'
+          name: 'Forks',
+          key: 'forks',
+          center: true
         }
 
       ]}

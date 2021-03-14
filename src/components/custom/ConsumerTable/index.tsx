@@ -2,28 +2,33 @@ import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Entity } from '../../../modules/core/entity'
 import { Page, PageConsumer } from '../../../modules/core/pageConsumer'
-import StyledTable from '../../styled/TableStyled'
+import Input from '../../common/Input'
+import Select from '../../common/Select'
+import StyledTable, { TableSize } from '../../styled/TableStyled'
 import Spinner from '../Spinner'
 
 type ConsumerTableCol<T extends object> = {
   key : string
   name : string
   center? : boolean
+
   content? : (entity : T) => React.ReactNode
 
 }
 type ConsumerTableProps<T extends Entity> = {
   cols : ConsumerTableCol<T>[]
   consumer : PageConsumer<T>
+  tableSize? : TableSize
   initialSize? : number
   onSelected? : (entity : T) => void
-  sorteable? : boolean
+
   searchable? : boolean
   resizeable? : boolean
+  title? : string
 
 }
 
-function ConsumerTable<T extends Entity> ({ cols, consumer, initialSize = 10, onSelected, searchable, sorteable, resizeable } : ConsumerTableProps<T>) {
+function ConsumerTable<T extends Entity> ({ cols, consumer, tableSize, initialSize = 10, onSelected, searchable, title, resizeable } : ConsumerTableProps<T>) {
   const [entities, setEntities] = useState<T[]>([])
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(0)
@@ -55,47 +60,52 @@ function ConsumerTable<T extends Entity> ({ cols, consumer, initialSize = 10, on
 
   useEffect(() => {
     findData()
-  }, [query])
+  }, [query, size])
   useEffect(() => {
     if (loading || !inView || (isEmpty && searchable)) return
     addData()
   }, [inView, loading, isEmpty])
   return (
     <div>
-    {
-      resizeable && <select onChange = {(e) => setSize(Number(e.currentTarget.value))}>
-      <option value="20">20</option>
-      <option value="50">50</option>
-      </select>
-    }
-    {
-      searchable && <input type="text" onChange = {(e) => inputChange(e.currentTarget.value) } value = {query}/>
-    }
+        <h3>{title}</h3>
+      <div className = 'header-actions'>
+        {
+        resizeable && <Select onChange = {(e) => setSize(Number(e.currentTarget.value))}>
+          <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        </Select>
+        }
+        {
+          searchable && <Input placeholder = 'Search' type="text" onChange = {(e) => inputChange(e.currentTarget.value) } value = {query}/>
+        }
 
-    <StyledTable>
+      </div>
+
+    <StyledTable size = {tableSize} >
+
         <thead>
          <tr>
           {
-            cols.map((col, key) => <th key = {key} className = { col.center ? 'row-center' : '' } >{col.name}</th>)
+            cols.map((col, key) => <th key = {key} className = { col.center ? 'col-center' : '' } >{col.name}</th>)
           }
          </tr>
         </thead>
         <tbody className = 'body'>
             {
               loading
-                ? <Spinner/>
+                ? <Spinner />
                 : entities.map((entity, i) => <tr key = {i} onClick = {() => onSelected?.(entity) }>
                     {
-                      cols.map((col, key) => <td key = {key} >{ col.content ? col.content(entity) : (entity as any)[col.key] }</td>)
+                      cols.map((col, key) => <td className = { col.center ? 'col-center' : '' } key = {key} >{ col.content ? col.content(entity) : (entity as any)[col.key] }</td>)
                     }
                 </tr>
                 )
             }
-
+            <div ref = {ref}></div>
         </tbody>
-        <tfoot ref = {ref}>
 
-        </tfoot>
     </StyledTable>
 
     </div>

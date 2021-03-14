@@ -12,17 +12,24 @@ export const UserTable : React.FC<UserTableProps> = () => {
   const { setUser } = useGithubUser()
   const userConsumerRef = useRef(new UserConsumer())
   return (
-    <ConsumerTable consumer = {userConsumerRef.current} searchable onSelected = {({ login }) => setUser(login) } cols = {[
-      {
-        name: 'Avatar',
-        key: 'avatar_url',
-        content: ({ avatar_url }) => <Avatar src = {avatar_url} />,
-        center: true
-      },
-      {
-        name: 'Username',
-        key: 'login'
-      }
-    ]} />
+    <ConsumerTable
+      consumer = {userConsumerRef.current}
+      title = 'Users'
+      resizeable
+      tableSize = 'big'
+      searchable
+      onSelected = {({ login }) => setUser(login) }
+       cols = {[
+         {
+           name: 'Avatar',
+           key: 'avatar_url',
+           content: ({ avatar_url }) => <Avatar size = 'small' src = {avatar_url} />,
+           center: true
+         },
+         {
+           name: 'Username',
+           key: 'login'
+         }
+       ]} />
   )
 }

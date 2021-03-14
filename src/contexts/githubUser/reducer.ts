@@ -4,7 +4,7 @@ import { GithubUserState } from './context'
 export const githubUserReducer : Reducer<GithubUserState, GithubUserAction> = (state : GithubUserState, action : GithubUserAction) : GithubUserState => {
   switch (action.type) {
     case 'REFRESH':
-      return { ...state, selectedUser: undefined, selectedRepository: undefined }
+      return { ...state, selectedRepository: undefined }
     case 'SET_USER':
       return { ...state, selectedUser: action.user, userLoading: action.loading }
 
