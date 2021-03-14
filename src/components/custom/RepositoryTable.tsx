@@ -1,6 +1,6 @@
-import { useGithubUser } from '../../../contexts/githubUser/context'
-import { RepositoryConsumer } from '../../../modules/repository/repositoryConsumer'
-import ConsumerTable from '../ConsumerTable'
+import { useGithubUser } from '../../contexts/githubUser/context'
+import { RepositoryConsumer } from '../../modules/repository/repositoryConsumer'
+import ConsumerTable from './ConsumerTable'
 
 interface RepositoryTableProps {
 

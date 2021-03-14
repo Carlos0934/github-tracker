@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useGithubUser } from '../../../contexts/githubUser/context'
-import RepositoryViewModal from '../RepositoryViewModal'
-import Spinner from '../Spinner'
-import UserCard from '../UserCard'
+import { useGithubUser } from '../../contexts/githubUser/context'
+import RepositoryViewModal from './RepositoryViewModal'
+import Spinner from './Spinner'
+import UserCard from './UserCard'
 
 const UserView : React.FC = () => {
   const { selectedUser, userLoading } = useGithubUser()
@@ -10,9 +10,9 @@ const UserView : React.FC = () => {
   useEffect(() => {
 
   }, [selectedUser])
-
-  if (!selectedUser) return <> </>
   if (userLoading) return <Spinner/>
+  if (!selectedUser) return <> </>
+
   return (
         <div>
            <UserCard user = {selectedUser}/>

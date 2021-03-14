@@ -1,9 +1,9 @@
 
 import { useRef } from 'react'
-import { useGithubUser } from '../../../contexts/githubUser/context'
-import { UserConsumer } from '../../../modules/user/userConsumer'
-import Avatar from '../Avatar'
-import ConsumerTable from '../ConsumerTable'
+import { useGithubUser } from '../../contexts/githubUser/context'
+import { UserConsumer } from '../../modules/user/userConsumer'
+import Avatar from './Avatar'
+import ConsumerTable from './ConsumerTable'
 
 type UserTableProps = {
 

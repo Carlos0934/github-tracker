@@ -1,12 +1,12 @@
-import { UserDetail } from '../../../modules/user'
-import { formatNumber } from '../../../utils/format'
-import Card from '../../styled/Card'
-import CardBody from '../../styled/Card/Body'
-import CardHeader from '../../styled/Card/Header'
-import Split from '../../styled/Split'
-import Avatar from '../Avatar'
-import NotAvailable from '../NotAvailable'
-import RepositoryTable from '../RepostoryTable'
+import { UserDetail } from '../../modules/user'
+import { formatNumber } from '../../utils/format'
+import Card from '../styled/Card'
+import CardBody from '../styled/Card/Body'
+import CardHeader from '../styled/Card/Header'
+import Split from '../styled/Split'
+import Avatar from './Avatar'
+import NotAvailable from './NotAvailable'
+import RepositoryTable from './RepositoryTable'
 
 type UserCardProps = {
     user : UserDetail

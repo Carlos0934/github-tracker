@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { Entity } from '../../../modules/core/entity'
-import { Page, PageConsumer } from '../../../modules/core/pageConsumer'
-import Input from '../../common/Input'
-import Select from '../../common/Select'
-import StyledTable, { TableSize } from '../../styled/TableStyled'
-import Spinner from '../Spinner'
+import { Entity } from '../../modules/core/entity'
+import { Page, PageConsumer } from '../../modules/core/pageConsumer'
+import Input from '../common/Input'
+import Select from '../common/Select'
+import StyledTable, { TableSize } from '../styled/TableStyled'
+import Spinner from './Spinner'
 
 type ConsumerTableCol<T extends object> = {
   key : string
